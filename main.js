@@ -6,12 +6,14 @@ const container = document.getElementById( 'three-container' );
 let width = container.clientWidth;
 let height = container.clientHeight;
 
-const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 10 );
-camera.position.z = 1;
+const camera = new THREE.PerspectiveCamera( 70, (1 * width) / (1 * height ), 0.01, 10 );
+camera.position.z = 3;
+camera.position.x = 0;
+camera.position.y = 0;
 
 const scene = new THREE.Scene();
 
-const geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshNormalMaterial();
 
 const mesh = new THREE.Mesh( geometry, material );
@@ -43,8 +45,8 @@ function onResize() {
 
 function animate( time ) {
 
-	mesh.rotation.x = time / 2000;
-	mesh.rotation.y = time / 1000;
+	mesh.rotation.x = time / 20000;
+	mesh.rotation.y = time / 10000;
 
 	renderer.render( scene, camera );
 
