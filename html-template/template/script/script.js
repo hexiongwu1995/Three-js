@@ -116,34 +116,21 @@
         }
         
         /**
-         * 生成多级序号
-         * @param {number} level - 标题层级
-         * @param {Array} indices - 各级索引数组
-         * @returns {string} 序号字符串
-         */
-        function generateNumber(level, indices) {
-            return indices.slice(1, level + 1).join('.');
-        }
-        
-        /**
          * 递归渲染目录树
          * @param {Array} tree - 目录树数组
          * @param {HTMLElement} container - 容器元素
          * @param {Array} indices - 当前索引路径
          * @param {number} currentLevel - 当前层级
          */
-        function renderTocTree(tree, container, indices = [0], currentLevel = 1) {
+        function renderTocTree(tree, container, currentLevel = 1) {
             const ol = document.createElement('ol');
-            
-            tree.forEach((item, index) => {
+
+            tree.forEach((item) => {
                 const li = document.createElement('li');
-                const newIndices = [...indices];
-                newIndices[currentLevel] = index + 1;
-                const number = generateNumber(currentLevel, newIndices);
-                
+
                 // 判断是否有可显示的子节点
                 const hasVisibleChildren = item.children.length > 0 && currentLevel < 3;
-                
+
                 // 创建展开/折叠按钮（仅 h1 和 h2 显示）
                 const toggleBtn = document.createElement('span');
                 toggleBtn.className = 'toggle-btn' + (!hasVisibleChildren ? ' leaf' : '');
@@ -155,18 +142,13 @@
                         handleToggleClick(toggleBtn, li);
                     });
                 }
-                
-                // 创建链接元素（包含序号和文字）
+
+                // 创建链接元素（仅包含文字）
                 const link = document.createElement('a');
                 link.href = '#' + item.id;
                 link.dataset.target = item.id;
                 link.dataset.level = currentLevel;
-                
-                // 创建序号
-                const numSpan = document.createElement('span');
-                numSpan.className = 'toc-number';
-                numSpan.textContent = number;
-                
+
                 // 创建文本
                 const textSpan = document.createElement('span');
                 textSpan.className = 'toc-text';
@@ -174,30 +156,29 @@
                 textSpan.style.overflow = 'hidden';
                 textSpan.style.textOverflow = 'ellipsis';
                 textSpan.style.whiteSpace = 'nowrap';
-                
+
                 // 组装链接
-                link.appendChild(numSpan);
                 link.appendChild(textSpan);
-                
+
                 // 创建目录项容器，包含链接和按钮（按钮在文字后面）
                 const tocItem = document.createElement('div');
                 tocItem.className = 'toc-item';
                 tocItem.appendChild(link);      // 先添加链接（靠左）
                 tocItem.appendChild(toggleBtn); // 再添加按钮（靠右）
                 li.appendChild(tocItem);
-                
+
                 // 递归渲染子目录（最多渲染到h3，即currentLevel <= 2）
                 if (item.children.length > 0 && currentLevel < 3) {
-                    const childOl = renderTocTree(item.children, li, newIndices, currentLevel + 1);
+                    const childOl = renderTocTree(item.children, li, currentLevel + 1);
                     // 默认折叠h2及以下的子目录
                     if (currentLevel >= 1) {
                         childOl.classList.add('toc-children');
                     }
                 }
-                
+
                 ol.appendChild(li);
             });
-            
+
             container.appendChild(ol);
             return ol;
         }
@@ -307,35 +288,5 @@
         
         // 初始化激活状态
         updateActiveTocItem();
-        
-        // ==================== 为文章标题添加多级序号 ====================
-        
-        /**
-         * 为文章中的标题添加多级序号
-         * @param {Array} tree - 目录树数组
-         * @param {Array} indices - 当前索引路径
-         * @param {number} currentLevel - 当前层级
-         */
-        function addNumberingToHeaders(tree, indices = [0], currentLevel = 1) {
-            tree.forEach((item, index) => {
-                const newIndices = [...indices];
-                newIndices[currentLevel] = index + 1;
-                const number = generateNumber(currentLevel, newIndices);
-                
-                const headerElement = document.getElementById(item.id);
-                if (headerElement) {
-                    const numberSpan = document.createElement('span');
-                    numberSpan.className = 'header-number';
-                    numberSpan.textContent = number + ' ';
-                    headerElement.insertBefore(numberSpan, headerElement.firstChild);
-                }
-                
-                if (item.children.length > 0) {
-                    addNumberingToHeaders(item.children, newIndices, currentLevel + 1);
-                }
-            });
-        }
-        
-        addNumberingToHeaders(tocTree);
-        
+
         // ==================== 多级目录生成完成 ====================

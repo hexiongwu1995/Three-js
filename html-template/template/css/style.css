@@ -189,11 +189,6 @@ article {
   padding-bottom: 400px;
 }
 
-.header-number {
-  font-weight: 500;
-  margin-right: 6px;
-}
-
 /* ==================== 多级目录样式 ==================== */
 
 /* 目录容器基础样式 */
@@ -209,7 +204,6 @@ nav ol {
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: toc-counter;
 }
 
 /* 嵌套列表缩进 */
@@ -285,19 +279,6 @@ nav .toggle-btn.expanded {
 /* 叶子节点（无子项）占位 */
 nav .toggle-btn.leaf {
   visibility: hidden;
-}
-
-/* 多级序号样式 */
-nav .toc-number {
-  margin-right: 8px;
-  color: #666;
-  font-weight: 400;
-  flex-shrink: 0;
-}
-
-/* 当前激活项序号颜色 */
-nav a.active .toc-number {
-  color: #007acc;
 }
 
 /* 层级字体大小递减 - 使用类选择器更精确 */
