@@ -318,4 +318,14 @@ nav::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
 
+.thmbox a {
+  color: #2a2a2ae0;
+  text-decoration: none;
+}
+
+.thmplain a {
+  color: #2a2a2ae0;
+  text-decoration: none;
+}
+
 /* ==================== 多级目录样式结束 ==================== */
