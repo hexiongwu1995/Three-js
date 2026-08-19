@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ol {
+            counter-reset: item
+        }
+
+        li {
+            display: block
+        }
+
+        li::before {
+            content: counter(item) ". ";
+            counter-increment: item
+        }
+    </style>
+</head>
+
+<body>
+    <ol> item0 is created, set to 0
+        <li> item0 is incremented to 1
+        <li> item0 is incremented to 2
+            <ol> item1 is created, set to 0, nested in item0
+                <li> item1 is incremented to 1
+                <li> item1 is incremented to 2
+                <li> item1 is incremented to 3
+                    <ol> item2 is created, set to 0, nested in item1
+                        <li> item2 is incremented to 1
+                    </ol>
+                <li> item1 is incremented to 4
+                    <ol> item3 is created, set to 0, nested in item1
+                        <li> item3 is incremented to 1
+                    </ol>
+                <li> item1 is incremented to 5
+            </ol>
+        <li> item0 is incremented to 3
+        <li> item0 is incremented to 4
+    </ol>
+    <ol> item4 is created, set to 0
+        <li> item4 is incremented to 1
+        <li> item4 is incremented to 2
+    </ol>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li::marker {
+            content: "(" counter(list-item, lower-roman) ")";
+        }
+
+        li {
+            display: list-item;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ol>
+        <li>This is the first item.
+        <li>This is the second item.
+        <li>This is the third item.
+    </ol>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        p {
+            margin-left: 8em
+        }
+
+        /* Make space for counters */
+        li {
+            list-style-type: lower-roman;
+        }
+
+        li::marker {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+    <p>This is a long preceding paragraph ...
+    <ol>
+        <li>This is the first item.
+        <li>This is the second item.
+        <li>This is the third item.
+    </ol>
+    <p>This is a long following paragraph ...
+</body>
+
+</html>

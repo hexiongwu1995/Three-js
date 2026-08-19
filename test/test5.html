@@ -4,91 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>麦克斯韦方程组</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hexiongwu1995/my-template@latest/dist/css/math.css">
-    <script src="https://cdn.jsdelivr.net/npm/@hexiongwu1995/my-template@latest/dist/script/mathjax.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/startup.js"></script>
-
+    <title>Document</title>
     <style>
-        html,
-        body,
-        .container {
-            width: 100vw;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow-y: hidden;
+        /* Set up list items */
+        li {
+            display: list-item;
+            /* implies 'counter-increment: list-item' */
         }
 
-        .container {
-            display: flex;
+        /* Set up ol and ul so that they scope the list-item counter */
+        ol,
+        ul {
+            counter-reset: list-item;
         }
 
-        aside {
-            width: 600px;
-            height: 100vh;
-            background-color: rgba(239, 239, 239, 0.253);
+        /* Default list style types for lists */
+        ol {
+            list-style-type: decimal;
         }
 
-        aside nav ol {
-            counter-reset: item;
-            list-style: none;
-            padding-left: 1.2em;
+        ul {
+            list-style-type: toggle(disc, circle, square);
         }
 
-        aside nav ol li {
-            counter-increment: item;
+        /* The type attribute on ol and ul elements */
+        ul[type="disc"] {
+            list-style-type: disc;
         }
 
-        aside nav ol li::before {
-            content: counters(item, ".") " ";
+        ul[type="circle"] {
+            list-style-type: circle;
         }
 
-        .overlay {
-            display: none;
+        ul[type="square"] {
+            list-style-type: square;
         }
 
-        main {
-            width: 1fr;
-            height: 100vh;
-            padding: 20px;
-            overflow-y: auto;
+        ol[type="1"] {
+            list-style-type: decimal;
         }
 
-        article {
-            counter-reset: chapter 0;
+        ol[type="a"] {
+            list-style-type: lower-alpha;
         }
 
-        h1 {
-            counter-increment: chapter;
-            counter-reset: section 0;
+        ol[type="A"] {
+            list-style-type: upper-alpha;
         }
 
-        h2 {
-            counter-increment: section;
-            counter-reset: subsection 0;
+        ol[type="i"] {
+            list-style-type: lower-roman;
         }
 
-        h3 {
-            counter-increment: subsection;
+        ol[type="I"] {
+            list-style-type: upper-roman;
         }
 
-        h1::before {
-            content: counter(chapter) ". ";
+        /* The start attribute on ol elements */
+        ol[start] {
+            counter-reset: list-item calc(attr(start integer, 1) - 1);
         }
 
-        h2::before {
-            content: counter(chapter) "." counter(section) " ";
-
+        /* The value attribute on li elements */
+        li[value] {
+            counter-set: list-item attr(value integer, 1);
         }
 
-        h3::before {
-            content: counter(chapter) "." counter(section) "." counter(subsection) " ";
+        /* Handling reversed lists */
+        ol[reversed] {
+            counter-reset: reversed(list-item);
+        }
+
+        ol[reversed][start] {
+            counter-reset: reversed(list-item) calc(attr(start integer) + 1);
+        }
+
+        /* Box Model Rules */
+        ol,
+        ul {
+            display: block;
+            margin-block: 1em;
+            marker-side: match-parent;
+            padding-inline-start: 40px;
+        }
+
+        ol ol,
+        ol ul,
+        ul ul,
+        ul ol {
+            margin-block: 0;
+        }
+
+        li {
+            text-align: match-parent;
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
         <aside>
             <nav>
