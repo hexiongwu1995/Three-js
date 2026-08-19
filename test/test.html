@@ -30,17 +30,17 @@
             background-color: rgba(239, 239, 239, 0.253);
         }
 
-        aside nav ol {
+        nav ol {
             counter-reset: item;
             list-style: none;
             padding-left: 1.2em;
         }
 
-        aside nav ol li {
+        nav ol li {
             counter-increment: item;
         }
 
-        aside nav ol li::before {
+        nav ol li::before {
             content: counters(item, ".") " ";
         }
 
@@ -51,39 +51,65 @@
         main {
             width: 1fr;
             height: 100vh;
-            padding: 20px;
+            padding: 40px;
             overflow-y: auto;
         }
 
         article {
-            counter-reset: chapter 0;
+            counter-reset: h1;
         }
 
         h1 {
-            counter-increment: chapter;
-            counter-reset: section 0;
+            counter-increment: h1;
+            counter-reset: h2;
         }
 
         h2 {
-            counter-increment: section;
-            counter-reset: subsection 0;
+            counter-increment: h2;
+            counter-reset: h3;
         }
 
         h3 {
-            counter-increment: subsection;
+            counter-increment: h3;
+            counter-reset: h4;
+        }
+
+        h4 {
+            counter-increment: h4;
+            counter-reset: h5;
+        }
+
+        h5 {
+            counter-increment: h5;
+            counter-reset: h6;
+        }
+
+        h6 {
+            counter-increment: h6;
         }
 
         h1::before {
-            content: counter(chapter) ". ";
+            content: counter(h1) ". ";
         }
 
         h2::before {
-            content: counter(chapter) "." counter(section) " ";
-
+            content: counter(h1) "." counter(h2) " ";
         }
 
         h3::before {
-            content: counter(chapter) "." counter(section) "." counter(subsection) " ";
+            content: counter(h1) "." counter(h2) "." counter(h3) " ";
+        }
+
+        h4::before {
+            content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) " ";
+        }
+
+        h5::before {
+            content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+        }
+
+        h6::before {
+            content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) " ";
         }
     </style>
 </head>
