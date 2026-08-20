@@ -240,24 +240,24 @@
             const stack = [{ level: 1, ol: tocRoot }];
 
             headings.forEach((heading) => {
-                const level = getLevel(heading);
+                const currentLevel = getLevel(heading);
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = '#' + heading.id;
                 a.textContent = heading.textContent;
                 li.appendChild(a);
 
-                while (stack.length > 1 && stack[stack.length - 1].level > level) {
+                while (stack.length > 1 && stack[stack.length - 1].level > currentLevel) {
                     stack.pop();
                 }
 
-                if (level > stack[stack.length - 1].level) {
+                if (currentLevel > stack[stack.length - 1].level) {
                     const newOl = document.createElement('ol');
                     const parentLi = stack[stack.length - 1].ol.lastElementChild;
                     if (parentLi) {
                         parentLi.appendChild(newOl);
                     }
-                    stack.push({ level: level, ol: newOl });
+                    stack.push({ level: currentLevel, ol: newOl });
                 }
 
                 stack[stack.length - 1].ol.appendChild(li);
